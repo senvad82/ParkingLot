@@ -1,0 +1,13 @@
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\bin\Debug\netcoreapp3.1\ParkingLot.exe
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\bin\Debug\netcoreapp3.1\ParkingLot.deps.json
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\bin\Debug\netcoreapp3.1\ParkingLot.runtimeconfig.json
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\bin\Debug\netcoreapp3.1\ParkingLot.runtimeconfig.dev.json
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\bin\Debug\netcoreapp3.1\ParkingLot.dll
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\bin\Debug\netcoreapp3.1\ParkingLot.pdb
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\obj\Debug\netcoreapp3.1\ParkingLot.csprojAssemblyReference.cache
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\obj\Debug\netcoreapp3.1\ParkingLot.AssemblyInfoInputs.cache
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\obj\Debug\netcoreapp3.1\ParkingLot.AssemblyInfo.cs
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\obj\Debug\netcoreapp3.1\ParkingLot.csproj.CoreCompileInputs.cache
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\obj\Debug\netcoreapp3.1\ParkingLot.dll
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\obj\Debug\netcoreapp3.1\ParkingLot.pdb
+C:\workspace\gitlabrepo\parkinglot\ParkingLot\ParkingLot\obj\Debug\netcoreapp3.1\ParkingLot.genruntimeconfig.cache
