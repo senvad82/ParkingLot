@@ -8,8 +8,7 @@ namespace ParkingLot
     {
         public string PlateNo { get; }
         public VehicleType VehicleType { get; }
-
-        //public ParkingTicket Ticket { get; set; }
+        
         public Vehicle(string plateNo, VehicleType type)
         {
             PlateNo = plateNo;

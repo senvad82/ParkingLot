@@ -19,4 +19,10 @@ namespace ParkingLot
         Large        
     }
 
+    public enum ParkingTicketStatus
+    {
+        Issued,
+        Paid
+    }
+
 }

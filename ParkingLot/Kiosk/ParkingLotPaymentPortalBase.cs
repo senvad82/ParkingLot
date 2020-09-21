@@ -5,21 +5,17 @@ using System.Text;
 
 namespace ParkingLot
 {
-    public class ParkingLotExit
-    {
-        private string _id;
-        private string _name;
-        private ParkingLot _lot;
-        public ParkingLotExit(string name, ParkingLot lot)
+    public class ParkingLotPaymentPortalBase: ParkingLotKioskBase
+    {       
+        public ParkingLotPaymentPortalBase(string name):base(name)
         {
-            _name = name;
-            _lot = lot;
+                
         }
 
         public double GetParkingFee(ParkingTicket ticket)
         {
             var totalHours = (DateTime.Now - ticket._issueDateTime).TotalHours;
-            var rates = _lot.GetParkingRates();
+            var rates = Lot.GetParkingRates();
             var firstHourRate = rates[rates.Keys.FirstOrDefault<int>()];
             if (totalHours <= firstHourRate) return firstHourRate; // first rate hour
             Double totalAmount = 0;
@@ -37,9 +33,17 @@ namespace ParkingLot
             return totalAmount;
         }
 
-        public bool ProcessPayment()
+        public bool ProcessPayment(ParkingTicket ticket, Payment payment)
         {
-            return true;
+            var result = payment.ProcessPayment();
+            if (result) { 
+                ticket.Status = ParkingTicketStatus.Paid;
+                ticket.Spot.Floor.ReleseSpot(ticket.Spot);
+                ticket.Save();
+                return true;
+            }
+            return false;
+            
         }
     }
 }

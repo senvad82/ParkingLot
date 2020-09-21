@@ -8,14 +8,16 @@ namespace ParkingLot
     {
         private string _id;
         public DateTime _issueDateTime { get; }
-        public bool paid { get; }
+        public ParkingTicketStatus Status { get; set; }
 
-        private Vehicle _vehicle;
+        public Vehicle Vehicle { get; set; }
+        public ParkingSpot Spot { get; set; }
         public ParkingTicket(Vehicle vehicle)
         {
-            _vehicle = vehicle;
+            Vehicle = vehicle;
             _id = Guid.NewGuid().ToString();
-            _issueDateTime = DateTime.Now;            
+            _issueDateTime = DateTime.Now;
+            Status = ParkingTicketStatus.Issued;
         }
 
         public void Save()

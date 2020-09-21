@@ -19,40 +19,92 @@ namespace ParkingLot
         private Dictionary<string, ParkingSpot> _availableMotorBikeSpots;
         private Dictionary<string, ParkingSpot> _availableHandicappedSpots;
 
+        private Dictionary<string, ParkingFloorCustomerInfoPanel> _customerInfoPortals;
+
+        private Dictionary<string, ParkingFloorDisplay> _floorDisplay;
+
+        private ParkingFloorDisplay _display;
+
         private int _carSpotsCount;
         private int _largeSpotsCount;
         private int _motorBikeSpotsCount;
         private int _handicappedSpotsCount;
 
+        //private ParkingLot _lot;
 
-        public ParkingFloor(string Identifier)
+        public ParkingFloor(string identifier)
         {
+            Identifier = identifier;
+            _carSpots = new Dictionary<string, ParkingSpot>();
+            _LargeSpots = new Dictionary<string, ParkingSpot>();
+            _motorBikeSpots = new Dictionary<string, ParkingSpot>();
+            _handicappedSpots = new Dictionary<string, ParkingSpot>();
 
+            _availableCarSpots = new Dictionary<string, ParkingSpot>();
+            _availableLargeSpots = new Dictionary<string, ParkingSpot>();
+            _availableMotorBikeSpots = new Dictionary<string, ParkingSpot>();
+            _availableHandicappedSpots = new Dictionary<string, ParkingSpot>();
+
+            _customerInfoPortals = new Dictionary<string, ParkingFloorCustomerInfoPanel>();
+
+            _floorDisplay = new Dictionary<string, ParkingFloorDisplay>();
+            // _lot = lot;
         }
 
         public void AddParkingSpot(ParkingSpotType type, string identifier)
         {            
             if (type == ParkingSpotType.Car) {
                 var spot = new ParkingSpot(ParkingSpotType.Car, identifier);
+                spot.Floor = this;
                 _carSpots.Add(identifier, spot);
                 _availableCarSpots.Add(identifier, spot);
             }   
             else if(type == ParkingSpotType.Large) {
                 var spot = new ParkingSpot(ParkingSpotType.Large, identifier);
+                spot.Floor = this;
                 _LargeSpots.Add(identifier, spot);
                 _availableLargeSpots.Add(identifier, spot);
             }                
             else if(type == ParkingSpotType.MotorBike) {
                 var spot = new ParkingSpot(ParkingSpotType.MotorBike, identifier);
+                spot.Floor = this;
                 _motorBikeSpots.Add(identifier, spot);
                 _availableMotorBikeSpots.Add(identifier, spot);
             }                
             else if (type == ParkingSpotType.HandiCapped) {
                 var spot = new ParkingSpot(ParkingSpotType.HandiCapped, identifier);
+                spot.Floor = this;
                 _handicappedSpots.Add(identifier, spot);
                 _availableHandicappedSpots.Add(identifier, spot);
             }
                
+        }
+
+        public void AddParkingSpot(ParkingSpot spot)
+        {
+            spot.Floor = this;
+            if (spot.Type == ParkingSpotType.Car)
+            {spot.Floor = this;
+                _carSpots.Add(spot.Identifier, spot);
+                _availableCarSpots.Add(spot.Identifier, spot);
+            }
+            else if (spot.Type == ParkingSpotType.Large)
+            {
+                _LargeSpots.Add(spot.Identifier, spot);
+                _availableLargeSpots.Add(spot.Identifier, spot);
+               
+            }
+            else if (spot.Type == ParkingSpotType.MotorBike)
+            {
+                _motorBikeSpots.Add(spot.Identifier, spot);
+                _availableMotorBikeSpots.Add(spot.Identifier, spot);              
+            }
+            else if (spot.Type == ParkingSpotType.HandiCapped)
+            {
+                _handicappedSpots.Add(spot.Identifier, spot);
+                _availableHandicappedSpots.Add(spot.Identifier, spot);
+            }
+
         }
 
         public void RemoveParkingSpot(ParkingSpot spot)
@@ -161,10 +213,10 @@ namespace ParkingLot
         {
             var message = string.Empty;
 
-            message = (_availableCarSpots.Keys.Count <= 0)?  message + "Car Spots are Full" : $"Available Car Spot{_availableCarSpots[_availableCarSpots.Keys.FirstOrDefault<string>()]}";
-            message = (_availableLargeSpots.Keys.Count <= 0) ? message + "Large Spots are Full" : $"Available Large Spot{_availableLargeSpots[_availableLargeSpots.Keys.FirstOrDefault<string>()]}";
-            message = (_availableMotorBikeSpots.Keys.Count <= 0) ? message + "Motorbike Spots are Full" : $"Available Motorbike Spot{_availableMotorBikeSpots[_availableMotorBikeSpots.Keys.FirstOrDefault<string>()]}";
-            message = (_availableHandicappedSpots.Keys.Count <= 0) ? message + "Handicap Spots are Full" : $"Available Handicap Spot{_availableHandicappedSpots[_availableHandicappedSpots.Keys.FirstOrDefault<string>()]}";
+            message = (_availableCarSpots.Keys.Count <= 0)?  message + "Car Spots are Full\n" : $"Available Car Spot{_availableCarSpots.Keys.FirstOrDefault<string>()}\n";
+            message = (_availableLargeSpots.Keys.Count <= 0) ? message + "Large Spots are Full\n" : $"Available Large Spot{_availableLargeSpots.Keys.FirstOrDefault<string>()}\n";
+            message = (_availableMotorBikeSpots.Keys.Count <= 0) ? message + "Motorbike Spots are Full\n" : $"Available Motorbike Spot{_availableMotorBikeSpots.Keys.FirstOrDefault<string>()}\n";
+            message = (_availableHandicappedSpots.Keys.Count <= 0) ? message + "Handicap Spots are Full\n" : $"Available Handicap Spot{_availableHandicappedSpots.Keys.FirstOrDefault<string>()}";
 
             return message;
         }
@@ -190,6 +242,23 @@ namespace ParkingLot
 
             return false;
 
+        }
+
+        public bool IsFull()
+        {
+            return (_availableCarSpots.Count == 0 && _availableLargeSpots.Count == 0 && _availableHandicappedSpots.Count == 0 && _availableMotorBikeSpots.Count == 0) ? true : false;
+        }
+
+        public void AddCustomerInfoPortal(ParkingFloorCustomerInfoPanel portal)
+        {
+            portal.floor = this;
+            _customerInfoPortals.Add(portal.Identifier, portal);
+        }
+
+        public void AddFloorDisplay(ParkingFloorDisplay display)
+        {
+            display.floor = this;
+            _floorDisplay.Add(display.Identifier, display);
         }
 
 
